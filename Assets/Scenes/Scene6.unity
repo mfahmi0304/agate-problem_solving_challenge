@@ -386,9 +386,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   boxSpawn: 8
-  boxPrefabs: {fileID: 4456196058239983337, guid: 0090d6f58e0be854a96c04d3d2b74ee3,
+  boxPrefab: {fileID: 4456196058239983337, guid: 0090d6f58e0be854a96c04d3d2b74ee3,
     type: 3}
   areaConstraintValue: 4
+  scoreText: {fileID: 0}
 --- !u!4 &824975907
 Transform:
   m_ObjectHideFlags: 0

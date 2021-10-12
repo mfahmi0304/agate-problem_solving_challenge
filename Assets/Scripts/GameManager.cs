@@ -25,7 +25,8 @@ public class GameManager : MonoBehaviour
 
     [Header("Box Controller")]
     public int boxSpawn;
-    [SerializeField] Box boxPrefabs;
+    [SerializeField] Box boxPrefab;
+    private List<Box> boxPool = new List<Box>();
 
     [Header("Game Area Constraint")]
     public float areaConstraintValue = 5f;
@@ -37,7 +38,7 @@ public class GameManager : MonoBehaviour
     {
         for (int i = 0; i < boxSpawn; i++)
         {
-            Box box = Instantiate(boxPrefabs);
+            Box box = Instantiate(boxPrefab);
             box.Spawn();
         }
          scoreText.text = $"{Score}";
@@ -55,5 +56,29 @@ public class GameManager : MonoBehaviour
     {
         Score++;
         scoreText.text = $"{Score}";
+    }
+
+    public void RespawnBox() => StartCoroutine(ReSpawnBox());
+    IEnumerator ReSpawnBox()
+    {
+        yield return new WaitForSeconds(3);
+        Box box = GetBox();
+        box.Spawn();
+    }
+
+    public Box GetBox()
+    {
+        for (int i = 0; i < boxPool.Count; i++)
+        {
+            if (!boxPool[i].gameObject.activeSelf)
+            {
+                boxPool[i].gameObject.SetActive(true);
+                return boxPool[i];
+            }
+        }
+
+        Box boxObject = Instantiate(boxPrefab, transform);
+        boxPool.Add(boxObject);
+        return boxObject;
     }
 }
