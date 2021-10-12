@@ -33,9 +33,15 @@ public class GameManager : MonoBehaviour
 
     [Header("UI")]
     public Text scoreText;
+    public UIGameOver GameOverUI;
+    
+    public bool IsGameOver { get { return isGameOver; } }
+
+    private bool isGameOver = false;
 
     private void Start()
     {
+        isGameOver = false;
         for (int i = 0; i < boxSpawn; i++)
         {
             Box box = Instantiate(boxPrefab);
@@ -81,4 +87,12 @@ public class GameManager : MonoBehaviour
         boxPool.Add(boxObject);
         return boxObject;
     }
+
+    public void GameOver()
+    {
+        isGameOver = true;
+        // ScoreManager.Instance.SetHighScore();
+        GameOverUI.Show();
+    }
+
 }
