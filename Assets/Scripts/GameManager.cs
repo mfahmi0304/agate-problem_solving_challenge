@@ -34,7 +34,7 @@ public class GameManager : MonoBehaviour
     [Header("UI")]
     public Text scoreText;
     public UIGameOver GameOverUI;
-    
+
     public bool IsGameOver { get { return isGameOver; } }
 
     private bool isGameOver = false;
@@ -67,9 +67,11 @@ public class GameManager : MonoBehaviour
     public void RespawnBox() => StartCoroutine(ReSpawnBox());
     IEnumerator ReSpawnBox()
     {
-        yield return new WaitForSeconds(3);
-        Box box = GetBox();
-        box.Spawn();
+        if(isGameOver == false){
+            yield return new WaitForSeconds(3);
+            Box box = GetBox();
+            box.Spawn();
+        }
     }
 
     public Box GetBox()
